@@ -1,0 +1,56 @@
+<html>
+  <header>
+    <title>Notes on Ethernet</title>
+  </header>
+  <body>
+    <div style="width:480px; margin: 0 auto;">
+      <h1>Notes on Ethernet</h1>
+      
+      <h2>100BASE-TX</h2>
+      
+      <p><a href="https://en.wikipedia.org/wiki/Fast_Ethernet#100BASE-TX">100BASE-TX</a>
+        is an Ethernet physical layer standard for 100Mb/s over two-pair
+        twisted pair Category 5 cables using 8-pin RJ45 connectors.</p>
+      
+      <p>Pair 2 (yellow/orange), on pins 1 (+, striped) and pin 2 (-,
+        solid) is used for transmit.  Pair 3 (green), on pins 3 (+,
+        striped) and 6 (-, solid) is used for receive.</p>
+      
+      <p><img width=400 height=240 src="eth-screen-cap.png" /></p>
+      
+      <p>Binary symbols are transmitted on the wire at 125MBd with three
+        voltage levels, +1V, 0V and -1V using
+        <a href="https://en.wikipedia.org/wiki/MLT-3_encoding">MLT-3</a>.
+        A 0 is signaled by staying at the same voltage level, and a 1 is
+        signaled by cyclicly transitioning through (-1V, 0V, +1V, 0V) to
+        the next voltage level.  This means a series of 1s generate a
+        31.5Mhz signal.</p>
+      
+      <p>A 100MHz binary signal (e.g. packet data) is encoded
+        using <a href="https://en.wikipedia.org/wiki/4B5B">4B5B</a> as
+        a 125Mhz signal for wire transmission.  A nibble is encoding
+        as 5 bits with at least two 1 bits present.  This allows the
+        receiver to perform clock recovery.  It also introduces
+        additional command symbols to signal beginning and end of
+        packet.</p>
+      
+      <p>The <a href="https://en.wikipedia.org/wiki/Ethernet_frame">Ethernet
+          frame</a> is organized into bytes.  Within bytes, the least
+        significant bit is transmitted first.  FIXME: This isn't the
+        whole story due to 4B5B encoding.</p>
+      
+      <p>The Ethernet frame begins with 7 bytes of preamble, 0x55, and
+        the start of frame delimiter, 0xd5.  It ends with a 32-bit
+        frame check sequence (CRC).  In 100BASE-TX on the line, the
+        frame is preceeded by the start-of-stream delimiter J/K and
+        followed by the end-of-stream delimiter T/R.</p>
+
+      <p>TODO: Capture J/K on LA.</p>
+      
+      <h2>MII: Media-Independent Iterface</h2>
+      
+      <p>Coming next.</p>
+    </div>
+    
+  </body>
+</html>
