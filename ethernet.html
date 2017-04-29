@@ -46,10 +46,39 @@
         followed by the end-of-stream delimiter T/R.</p>
 
       <p>TODO: Capture J/K on LA.</p>
+
+      <h2>Address Resolution Protocol (ARP)</h2>
+
+      <p>ARP can be used to look up the Etherent address associated to
+        an IP address.  This is necessary because a host on an
+        Ethernet network cannot send a packet directly to an IP
+        address.</p>
+
+      <p>The host performing the lookup sends a broadcast ARP packet
+        with target Ethernet address.  The host with that Ethernet
+        address replies with its IP address.  The ARP request and
+        reply packets have the following format:</p>
       
-      <h2>MII: Media-Independent Iterface</h2>
+      <ul>
+        <li>6-byte Ethernet destination address</li>
+        <li>6-byte Ethernet source address</li>
+        <li>2-byte frame type 0x0806</li>
+        <li>2-byte hardware address type.  1 for Ethernet.</li>
+        <li>2-byte protocol address type.  0x0800 for IP.</li>
+        <li>1-byte size of hardware address.  6 for Ethernet.</li>
+        <li>1-byte size of protocol address.  4 for IP.</li>
+        <li>2-byte operation.  1 for ARP request, 2 for ARP reply.</li>
+        <li>6-byte sender Ethernet address</li>
+        <li>4-byte sender IP address</li>
+        <li>6-byte target Ethernet address</li>
+        <li>4-byte target IP address</li>
+      </ul>
+
+      <p>There is duplicate information, for example, the sender's
+        Ethernet address.  For looking up an IP address from an
+        Ethernet address, the Ethernet frame is a 14 byte Ethernet
+        header plus a 28 byte of ARP request/reply payload.</p>
       
-      <p>Coming next.</p>
     </div>
     
   </body>
