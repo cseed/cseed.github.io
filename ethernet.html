@@ -78,6 +78,41 @@
         Ethernet address.  For looking up an IP address from an
         Ethernet address, the Ethernet frame is a 14 byte Ethernet
         header plus a 28 byte of ARP request/reply payload.</p>
+
+      <h2>Link Layer Access</h2>
+      
+      <p>The Linux packet interface provides access to packets at the
+	link layer (e.g. Ethernet frames).  To create a packet socket:</p>
+
+      <p><tt><pre>  fd = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));</pre></tt></p>
+      
+      <p>If the socket type is <tt>SOCK_RAW</tt>, the link layer
+	header is included, and if it is <tt>SOCK_DGRAM</tt>, it is
+	not.</p>
+      
+      <p><tt>recvfrom</tt> can be used to recieve packets.  The source
+	address is a <tt>struct sockaddr_ll</tt>:</p>
+      
+      <p><tt><pre>  struct sockaddr_ll {
+    unsigned short sll_family;   /* Always AF_PACKET */
+    unsigned short sll_protocol; /* Physical-layer protocol */
+    int            sll_ifindex;  /* Interface number */
+    unsigned short sll_hatype;   /* ARP hardware type */
+    unsigned char  sll_pkttype;  /* Packet type */
+    unsigned char  sll_halen;    /* Length of address */
+    unsigned char  sll_addr[8];  /* Physical-layer address */
+  };</pre></tt></p>
+      
+      <p>For more information, see <tt>packet(7)</tt></p>
+      
+      <p>TODO: sending packets</p>
+      
+      <p>BSD provides link layer access through the BSD Packet Filter
+	(BPF) interface, and SVR4 through the Datalink Provider
+	Interface
+	(DLPI).  <a href="http://www.tcpdump.org/"><tt>libpcap</tt></a>
+	is a portable library for link level packet
+	access.  <tt>tcpdump</tt> is built on <tt>libpcap</tt>.</p>
       
     </div>
     
