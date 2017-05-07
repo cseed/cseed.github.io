@@ -105,7 +105,12 @@
       
       <p>For more information, see <a href="http://man7.org/linux/man-pages/man7/packet.7.html"><tt>packet(7)</tt></a>.</p>
       
-      <p>TODO: sending packets</p>
+      <p><tt>sendto</tt> can be used to send link layer packets.  For
+        the destination address, from packet(7): When you send
+        packets, it is enough to
+        specify <tt>sll_family</tt>, <tt>sll_addr</tt>, <tt>sll_halen</tt>,
+        <tt>sll_ifindex</tt>, and <tt>sll_protocol</tt>.  The other
+        fields should be 0.</p>
       
       <p>BSD provides link layer access through the BSD Packet Filter
 	(BPF) interface, and SVR4 through the Datalink Provider
