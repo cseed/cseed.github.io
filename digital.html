@@ -1,0 +1,87 @@
+<html>
+  <header>
+    <title>Notes on Digital Design</title>
+  </header>
+  <body>
+    <div style="width:480px; margin: 0 auto;">
+      <h1>Notes on Digital Design</h1>
+
+      <h2>Verilog</h2>
+
+      <p>There are two types of numbers, sized and unsized.  Sized
+        numbers are represented by <tt>size'base-format number</tt>.
+        Unsized numbers are written without a size specification, but
+        possibly with a base format.  Sized numbers are always
+        positive.  The number of bits in an unsized number is
+        implementation-dependent but must be at least 32.  Literals
+        with high bit x or z are extended with x or z.  _ is allowed
+        in a literal except as the first character.</p>
+
+      <p>Data types: nets, registers, vectors, integer, real, time.
+        Vectors can be declared [high:low] or [low:high].  The number
+        on the left is always the most significant bit.  Values of
+        type time are at least 64 bits.  <tt>$time</tt> gets the
+        current simulation time.</p>
+
+      <p>Arrays can have type reg, vector reg, integer or time.
+        Multi-dimensional arrays are not supported.  An array of reg
+        and a vector reg are not the same.  Memories are arrays of
+        registers.</p>
+
+      <p>When a real is assigned to an integer, it is rounded to the
+        nearest integer.</p>
+
+      <p>Strings can be stored in registers.  Each character takes up
+        8 bits.  Concatenation can be used on
+        strings.  <tt>$sformat</tt></p>
+
+      <p>parameters</p>
+      
+      <p>Concatenation can be used on the right-hand side of continuous
+        assignment statements.</p>
+
+      <h3>Behavioral Modeling</h3>
+
+      <p><tt>always</tt> and <tt>initial</tt> are structured
+        statements that represent a concurrent activity.
+        An <tt>initial</tt> block executes once at time
+        0.  <tt>always</tt> block starts at time 0 and executes in a
+        loop.  If a statement is prefixed by <tt>#delay</tt>, its
+        execution is delayed by <tt>delay</tt> units after the current
+        execution time.</p>
+      
+      <p>The right hand side of an assignment can be one of: a reg (or
+        vector reg), integer, real, time, bit select, part select, or
+        a concatenation of any of the above.  There are two kinds of
+        assignment: blocking and nonblocking.  Blocking assignments
+        are written with <tt>=</tt> and evaluate the right-hand side
+        and immediately assign the left-hand side.</p>
+
+      <p>Non-blocking assignments are written with <tt>&lt;=</tt> and
+        the right-hand side is evaluated and the assignment executes
+        at the end of the time step in which it is scheduled.</p>
+
+      <p>There are two kinds of timing controls: delay based and event
+        based.  There are three kinds of delay-based controls on
+        assignments: regular, intra-assignment and zero delay.
+        Event-based controls are specified with <tt>@</tt>.  An event
+        is a change on the value of a register or net.  There are four
+        types of event-based timing control: regular, named, OR, and
+        level-sensitive.  Level-sensitive timing control is written
+        using the keyword <tt>wait</tt>.</p>
+      
+      <p>case statement.  The case value is compared to the
+        alternatives in the order they are written.  The comparison is
+        done using case equality (<tt>===</tt>).</p>
+
+      <p>RESUME 7.6 Loops</p>
+      
+      <h2>Primitives</h2>
+      
+      <p>TODO: d-flipflop, t-flipflop</p>
+      
+    </div>
+  </body>
+</html>
+
+
